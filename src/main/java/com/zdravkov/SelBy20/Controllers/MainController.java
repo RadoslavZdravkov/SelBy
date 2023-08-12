@@ -40,6 +40,7 @@ public class MainController {
         updatedUser.setEmail(user.getEmail());
         updatedUser.setUsername(user.getUsername());
         updatedUser.setPassword(user.getPassword());
+        userRepository.save(updatedUser);
         return "User updated!";
     }
 
