@@ -4,7 +4,10 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.Collection;
+
 @Entity
+@Table(name = "users", uniqueConstraints = @UniqueConstraint(columnNames = "email"))
 @Getter
 @Setter
 public class User {
@@ -29,5 +32,13 @@ public class User {
 
     @Column
     private String password;
+
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "user_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
+    private Collection<Role>roles;
 
 }
