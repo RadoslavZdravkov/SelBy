@@ -16,4 +16,10 @@ public class Role {
 
     @Column
     private String roleType;
+
+    public Role(){}
+    public Role(String roleType){
+        this.roleType = roleType;
+    }
+
 }

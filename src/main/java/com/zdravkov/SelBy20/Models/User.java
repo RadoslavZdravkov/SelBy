@@ -32,12 +32,24 @@ public class User {
 
     @Column
     private String password;
+    public User(){}
+
+    public User(String firstName, String lastName, String email, String birthday,
+                String username, String password, Collection<Role>roles){
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.birthday = birthday;
+        this.username = username;
+        this.password = password;
+    }
+
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
             name = "user_roles",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id")
+            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id")
     )
     private Collection<Role>roles;
 
